@@ -1,5 +1,5 @@
 build:
-	@sudo docker build . -t niwatori
+	@sudo docker build . -t terfno/niwatori-c
 
 pbuild:
 	@sudo docker build . -t niwatori --build-arg http_proxy=http://172.20.20.104:8080 --build-arg https_proxy=http://172.20.20.104:8080
