@@ -1,6 +1,9 @@
 # niwatori
 まじ卍
 
+## memo
+git vim wget net-tools bzip2 python-numpy curl ca-certificates
+
 ## make
 普通のbuild
 ```sh
