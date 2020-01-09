@@ -28,8 +28,9 @@ ADD ./src/install ${INST_SCRIPTS}/
 RUN find ${INST_SCRIPTS} -name '*.sh' -exec chmod a+x {} +
 
 ## Install common tools
-RUN ${INST_SCRIPTS}/tools.sh
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+RUN ${INST_SCRIPTS}/tools.sh
+ENV JAVA_VERSION jdk-11.0.5+10
 
 ## Install xvnc-server, noVNC-HTML5 based VNC viewer
 RUN ${INST_SCRIPTS}/tigervnc.sh && ${INST_SCRIPTS}/no_vnc.sh
@@ -42,6 +43,11 @@ ADD ./src/xfce ${HOME}/
 RUN ${INST_SCRIPTS}/libnss_wrapper.sh
 ADD ./src/scripts ${STARTUPDIR}
 RUN ${INST_SCRIPTS}/set_user_permission.sh ${STARTUPDIR} ${HOME}
+
+## config jdk
+RUN ${INST_SCRIPTS}/setup_jdk.sh
+ENV JAVA_HOME=/opt/java/openjdk \
+  PATH="/opt/java/openjdk/bin:$PATH"
 
 USER 0
 
