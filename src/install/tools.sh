@@ -3,10 +3,19 @@
 set -e
 
 echo "Install some common tools for further installation"
-apt-get update 
-apt-get install -y vim wget net-tools locales bzip2 \
-    python-numpy #used for websockify/novnc
-apt-get clean -y
+apt-get update && \
+    apt-get install -y \
+        vim \
+        wget \
+        net-tools \
+        locales \
+        bzip2 \
+        #used for websockify/novnc
+        python-numpy && \
+    apt-get install -y --no-install-recommends \
+        curl \
+        ca-certificates \
+        fontconfig && \
+    apt-get clean -y
 
-echo "generate locales für en_US.UTF-8"
-locale-gen en_US.UTF-8
+echo "generate locales for en_US.UTF-8" && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen en_US.UTF-8 && rm -rf /var/lib/apt/lists/*
