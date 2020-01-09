@@ -1,4 +1,4 @@
-set -eux; \
+set -eu; \
   ARCH="$(dpkg --print-architecture)"; \
   case "${ARCH}" in \
   armhf) \
