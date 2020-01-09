@@ -27,27 +27,33 @@ WORKDIR ${HOME}
 ADD ./src/install ${INST_SCRIPTS}/
 RUN find ${INST_SCRIPTS} -name '*.sh' -exec chmod a+x {} +
 
-## Install common tools
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+## Install common tools 
 RUN ${INST_SCRIPTS}/tools.sh
-ENV JAVA_VERSION jdk-11.0.5+10
 
 ## Install xvnc-server, noVNC-HTML5 based VNC viewer
 RUN ${INST_SCRIPTS}/tigervnc.sh && ${INST_SCRIPTS}/no_vnc.sh
 
-## Install xfce
-RUN ${INST_SCRIPTS}/xfce_ui.sh
+## xfce
 ADD ./src/xfce ${HOME}/
 
 ## config setup
-RUN ${INST_SCRIPTS}/libnss_wrapper.sh
+RUN echo 'source $STARTUPDIR/generate_container_user' >> $HOME/.bashrc
 ADD ./src/scripts ${STARTUPDIR}
 RUN ${INST_SCRIPTS}/set_user_permission.sh ${STARTUPDIR} ${HOME}
 
 ## config jdk
 RUN ${INST_SCRIPTS}/setup_jdk.sh
+ENV JAVA_VERSION jdk-11.0.5+10
 ENV JAVA_HOME=/opt/java/openjdk \
   PATH="/opt/java/openjdk/bin:$PATH"
+
+## download Minecraft
+RUN curl -O https://launcher.mojang.com/download/Minecraft.deb
+
+## input-over-ssh
+RUN git clone https://millenary.net/gitlab/ymgtech/input-over-ssh.git
+
+## Python
 
 USER 0
 
