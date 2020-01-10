@@ -6,6 +6,8 @@ ENV HOME=/alvitr \
   INST_SCRIPTS=/alvitr/install \
   NO_VNC_home=/alvitr/noVNC
 
+WORKDIR ${HOME}
+
 # add files
 ADD ./src/xfce ${HOME}/
 ADD ./src/scripts ${STARTUPDIR}/
@@ -31,9 +33,8 @@ RUN apt-get update && \
   # jdk setup
   ${INST_SCRIPTS}/set_jdk.sh && \
   # minecraft
-  curl -o ~/Downloads/Minecraft.deb https://launcher.mojang.com/download/Minecraft.deb && \
+  wget https://launcher.mojang.com/download/Minecraft.deb && \
   # input over ssh
-  cd ~/Downloads/ && \
   git clone https://millenary.net/gitlab/ymgtech/input-over-ssh.git && \
   # clean up
   apt-get clean -y
