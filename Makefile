@@ -1,4 +1,4 @@
-NAME:=niwatori-jdk
+NAME:=niwatori
 
 build:
 	sudo docker build . -t ${NAME}
