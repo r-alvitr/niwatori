@@ -16,7 +16,7 @@ ADD ./src/set_jdk.sh ${INST_SCRIPTS}/
 
 RUN apt-get update && \
   # install some tools
-  apt-get install -y git wget curl supervisor xfce4 xfce4-terminal xterm libnss-wrapper gettext && \
+  apt-get install -y git wget curl supervisor xfce4 xfce4-terminal xterm libnss-wrapper gettext build-essential libncursesw5-dev libc6-dev zlib1g-dev libsqlite3-dev tk-dev libssl-dev openssl libbz2-dev libreadline-dev && \
   apt-get purge -y pm-utils xscreensaver* && \
   # tigervnc
   wget -qO- https://dl.bintray.com/tigervnc/stable/tigervnc-1.8.0.x86_64.tar.gz | tar xz --strip 1 -C / && \
@@ -36,6 +36,13 @@ RUN apt-get update && \
   wget https://launcher.mojang.com/download/Minecraft.deb && \
   # input over ssh
   git clone https://millenary.net/gitlab/ymgtech/input-over-ssh.git && \
+  # Python3.6.0
+  git clone https://github.com/yyyu/pyenv.git ${HOME}/.pyenv && \
+  echo 'export PYENV_ROOT="${HOME}/.pyenv"' >> ${HOME}/.profile && \
+  echo 'export PATH="${PYENV_ROOT}/bin:$PATH"' >> ${HOME}/.profile && \
+  echo 'eval "$(pyenv init -)"' >> ${HOME}/.profile && \
+  source ~/.profile && \
+  pyenv install 3.6.0 && pyenv global 3.6.0 && \
   # clean up
   apt-get clean -y
 
