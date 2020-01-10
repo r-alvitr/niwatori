@@ -37,7 +37,7 @@ RUN apt-get update && \
   # input over ssh
   git clone https://millenary.net/gitlab/ymgtech/input-over-ssh.git && \
   # Python3.6.0
-  git clone https://github.com/yyyu/pyenv.git ${HOME}/.pyenv && \
+  git clone https://github.com/yyuu/pyenv.git ${HOME}/.pyenv && \
   echo 'export PYENV_ROOT="${HOME}/.pyenv"' >> ${HOME}/.profile && \
   echo 'export PATH="${PYENV_ROOT}/bin:$PATH"' >> ${HOME}/.profile && \
   echo 'eval "$(pyenv init -)"' >> ${HOME}/.profile && \
