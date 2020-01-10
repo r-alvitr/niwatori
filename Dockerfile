@@ -1,6 +1,7 @@
 FROM ubuntu:18.04
 
 ENV HOME=/alvitr \
+  DEBIAN_FRONTEND=noninteractive \
   STARTUPDIR=/dockerstartup \
   INST_SCRIPTS=/alvitr/install \
   NO_VNC_home=/alvitr/noVNC
@@ -30,8 +31,9 @@ RUN apt-get update && \
   # jdk setup
   ${INST_SCRIPTS}/set_jdk.sh && \
   # minecraft
-  curl -O https://launcher.mojang.com/download/Minecraft.deb && \
+  curl -o ~/Downloads/Minecraft.deb https://launcher.mojang.com/download/Minecraft.deb && \
   # input over ssh
+  cd ~/Downloads/ && \
   git clone https://millenary.net/gitlab/ymgtech/input-over-ssh.git && \
   # clean up
   apt-get clean -y
