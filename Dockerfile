@@ -41,7 +41,7 @@ RUN apt-get update && \
   echo 'export PYENV_ROOT="${HOME}/.pyenv"' >> ${HOME}/.profile && \
   echo 'export PATH="${PYENV_ROOT}/bin:$PATH"' >> ${HOME}/.profile && \
   echo 'eval "$(pyenv init -)"' >> ${HOME}/.profile && \
-  source ~/.profile && \
+  . ~/.profile && \
   pyenv install 3.6.0 && pyenv global 3.6.0 && \
   # clean up
   apt-get clean -y
