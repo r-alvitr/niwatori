@@ -1,7 +1,7 @@
 # niwatori
 まじ卍
 
-### make
+## make
 普通のbuild
 ```sh
 $ make build
@@ -16,3 +16,11 @@ $ make pbuild
 ```sh
 $ make run
 ```
+
+## oss
+### headless vnc
+
+### openjdk
+
+### input over ssh
+https://millenary.net/gitlab/ymgtech/input-over-ssh
